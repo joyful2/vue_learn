@@ -9,7 +9,7 @@
                   <router-link to="/News">新闻</router-link>
               </li>
               <li>
-                  <router-link to="/Shequ">社区</router-link>
+                  <router-link to="/Shequ/aa">社区</router-link>
               </li>
               <li>
                   <router-link to="/About/args">关于我们</router-link>
@@ -19,6 +19,9 @@
               </li>
                <li>
                   <router-link to="/Regist">注册</router-link>
+              </li>
+              <li>
+                <router-link to="/joePage/joe">joePage</router-link>
               </li>
           </ul>
       </header>
