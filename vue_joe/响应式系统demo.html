@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应式</title>
+</head>
+<body>
+  <div id="app">
+  </div>
+  <script>
+        // todo 待完整检查一遍！
+
+  // 响应式系统搭建：
+
+var vueData = {
+  list:{
+    age:'18'
+  },
+  name:'joe'
+}
+var deps = []
+
+function observe(data){
+  for(let k in data){
+    let value = data[k]
+    if(toString.call(value) === '[object Object]'){
+      observe(value)
+    }
+    Object.defineProperty(data,k,{
+      get(){
+        deps.push(target)
+        return value
+      },
+      set(newVal){
+        if(newVal === value){return }
+        value = newVal
+        deps.forEach((cb)=>{
+          cb(newVal,value)
+        })
+      }
+    })
+  }
+}
+observe(vueData)
+
+var target = null
+function $watch(str,fn){
+  target = fn
+  let arr,obj = vueData
+  console.log('str:',str);
+
+  if(typeof str === 'function'){
+    str()
+    return 
+  }
+  if(/\./.test(str)){
+    arr = str.split('.')
+    arr.forEach((key)=>{
+      obj = obj[key]
+    })
+    return 
+  }
+
+  vueData[str]
+}
+
+// $watch('list.age',(val,oldVal)=>{
+//   // todo 支持val入参
+//   console.log('触发渲染:',val,oldVal);
+// })
+
+function render(nVal,oVal){
+  // console.log('nVal,oVal:',nVal,oVal);
+  with(vueData){
+    console.log('in render --:', list.age,name);
+  }
+}
+
+$watch(render,render)
+
+
+vueData.name = 'jj'
+vueData.list.age = '32'
+
+  </script>
+</body>
+</html>

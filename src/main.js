@@ -3,6 +3,30 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+var myStore = new Vuex.Store({
+
+// var myStore = new Vuex.createStore({
+  state: {
+    // 存放组件之间共享的数据
+    name: 'Remi',
+    age: '18'
+  },
+
+  mutations: {
+    // 显式的更改state里的数据
+  },
+  getters: {
+    // 过滤提取state数据
+  },
+  actions: {
+    // 异步处理
+  }
+})
+console.log('myStore:', myStore)
 
 Vue.config.productionTip = false
 
@@ -11,7 +35,21 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store: myStore,
+  data: {
+    // name: 'xiao'
+  },
+  mounted: function () {
+    console.log('vue this: ', this)
+  },
+  computed: {
+    name () {
+      console.log('___this:', this)
+      console.log('___this.$store:', this.$store)
+      return this.$store.state.name
+    }
+  }
 })
 
 router.beforeEach((to, from, next) => {
@@ -50,10 +88,6 @@ router.beforeEach((to, from, next) => {
   // }
   // // todo next的使用
   // next()
-})
-
-router.beforeEach((to, from, next) => {
-
 })
 
 // 全局后置钩子。
