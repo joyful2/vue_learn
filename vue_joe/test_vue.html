@@ -8,22 +8,22 @@
 </head>
 <body>
   <div id="app">
-    测试Vue.js {{a }}
+    测试Vue.js {{ a }}
   </div>
   <script src="./Vue.js"></script>
 
   <script>
 
-// var vm = new Vue({
-//     el:'app',
-//     data: {
-//       a:'11'
-//     },
-// 		filters:'测试 mergeField 是否重复执行'
-//   })
-  Vue() 
-
-
+  var vm = new Vue({
+    el:'app',
+    data: {
+      a:'11'
+    },
+    methods:{a(){},b(){}},
+		filters:'测试 mergeField 是否重复执行'
+  })
+  console.log('vm:',vm);
+  Vue()
 
   </script>
 </body>
