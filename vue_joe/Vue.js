@@ -116,11 +116,10 @@
 
       return options
     }
-    // todo 修改到这里了！
     
     function callHook(vm,hookName){
       const hookHandlers = vm.$options[hookName]
-      hookHandlers.forEach((hook)=>{
+      (hookHandlers||[]).forEach((hook)=>{
         hook.call(vm)
       })
     }
